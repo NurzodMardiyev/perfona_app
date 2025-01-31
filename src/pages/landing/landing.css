@@ -1,0 +1,80 @@
+.loading {
+  width: 100%;
+  background: linear-gradient(90deg, #0369ff, #023fff);
+  z-index: 98;
+}
+
+.anima {
+  animation: animName 3s ease forwards;
+}
+
+@keyframes animName {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.custom-placeholder::placeholder {
+  color: #979797;
+  font-style: italic;
+  font-size: 14px;
+  font-family: "IvyEpic", sans-serif;
+}
+.custom-placeholder {
+  font-style: italic;
+}
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-button {
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-button:focus {
+  outline: none;
+}
+
+/* Dropdown menyu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  /* Animatsiya uchun boshlang'ich holat */
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Dropdown ochilgan holati */
+.dropdown-container.active .dropdown-menu {
+  max-height: 200px; /* Menyu balandligi */
+  opacity: 1;
+  visibility: visible;
+}
+.dark .css-1pjiorc-MuiPaper-root-MuiPopover-paper-MuiMenu-paper::before,
+.dark .css-1toxriw-MuiList-root-MuiMenu-list,
+.dark .css-1pjiorc-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  background-color: #1f2937;
+  color: white;
+}
+.css-1rju2q6-MuiButtonBase-root-MuiMenuItem-root {
+  font-size: 14px !important;
+  font-style: italic;
+}
