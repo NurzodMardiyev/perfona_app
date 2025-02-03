@@ -215,8 +215,6 @@ export default function LandingPage() {
         </h1>
         <div>
           <Courses />
-          <Courses />
-          <Courses />
         </div>
       </div>
     </div>

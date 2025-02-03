@@ -17,11 +17,12 @@ export const Perfona = {
     }
   },
 
-  coursesData: async () => {
+  coursesData: async (page, limet) => {
     // english o'zgaradi && page bilan limet ham o'zgaradi
+    console.log(page);
     try {
       const { data } = await axios.get(
-        `${api}key=main_card&page=2&limit=3&category=english`,
+        `${api}key=main_card&page=${page}&limit=${limet}&category=english`,
         {
           mode: "cors",
           headers: {
