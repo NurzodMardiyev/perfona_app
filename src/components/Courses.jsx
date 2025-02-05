@@ -111,7 +111,7 @@ export default function Courses() {
             >
               <ShoppingBasket size={20} className="inline-block" />{" "}
               <p className="whitespace-nowrap leading-[15px] mt-0.5">
-                Sotib olish
+                Sotish kerak
               </p>
             </Link>
           </div>
