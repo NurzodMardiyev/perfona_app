@@ -27,7 +27,7 @@ export default function Courses() {
       }));
 
       if (response.data.length < limit) {
-        setHasMore(false); // Agar kamroq data kelsa, demak oxirgi sahifa
+        setHasMore(false);
       }
 
       setIsFetching(false);
