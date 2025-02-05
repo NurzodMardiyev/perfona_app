@@ -59,7 +59,7 @@ export default function Courses() {
   // Dastlabki ma'lumotlarni yuklash
   useEffect(() => {
     console.log("Fetching initial data...");
-    setIsFetching(false); // Yuklash boshlandi
+    setIsFetching(false);
     coursesData.mutate(page); // Birinchi sahifani yuklash
   }, []);
 
@@ -102,7 +102,7 @@ export default function Courses() {
             >
               <Bell size={18} />
               <p className="whitespace-nowrap leading-[15px] mt-0.5">
-                Obuna bo‘ling
+                Obuna bo‘mang
               </p>
             </Link>
             <Link
