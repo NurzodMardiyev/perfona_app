@@ -102,7 +102,7 @@ export default function Courses() {
             >
               <Bell size={18} />
               <p className="whitespace-nowrap leading-[15px] mt-0.5">
-                Obuna bo‘mang
+                Obuna bo‘ling
               </p>
             </Link>
             <Link
