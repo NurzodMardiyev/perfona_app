@@ -18,7 +18,8 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorValue, setAnchorValue] = useState("");
-  const [coursesData, setCoursesData] = useState([]);
+  const [coursesType, setCoursesType] = useState([]);
+  const [typeName, setTypeName] = useState("english");
 
   // const location = useLocation();
 
@@ -26,7 +27,7 @@ export default function LandingPage() {
   const coursesCategory = useMutation(Perfona.coursesCategory, {
     onSuccess: (data) => {
       queryClient.invalidateQueries();
-      setCoursesData(data);
+      setCoursesType(data);
       // console.log(data);
     },
     onError: () => {
@@ -163,18 +164,15 @@ export default function LandingPage() {
                   },
                 }}
               >
-                <MenuItem
-                  className="text-[14px]"
-                  onClick={() => handleClose("Ingliz tili")}
-                >
-                  Ingliz tili
-                </MenuItem>
-                <MenuItem onClick={() => handleClose("Matematika")}>
-                  Matematika
-                </MenuItem>
-                <MenuItem onClick={() => handleClose("Informatika")}>
-                  Informatika
-                </MenuItem>
+                {coursesType?.map((item) => (
+                  <MenuItem
+                    key={item.key}
+                    className="text-[14px]"
+                    onClick={() => handleClose(item.name)}
+                  >
+                    {item.name}
+                  </MenuItem>
+                ))}
               </Menu>
             </div>
           </form>
@@ -184,10 +182,11 @@ export default function LandingPage() {
       {/* course type */}
       <div className="">
         <ul className="flex  gap-[11px] max-w-sm mx-auto overflow-x-scroll w-full scrollbar-hide">
-          {coursesData?.map((item) => (
+          {coursesType?.map((item) => (
             <li
               key={item.key}
-              className="px-[23px] py-[8px] rounded-full course_type active whitespace-nowrap "
+              className="px-[23px] py-[8px] rounded-full course_type active whitespace-nowrap cursor-pointer"
+              onClick={() => setTypeName(item.name)}
             >
               {item.name}
             </li>
@@ -214,7 +213,7 @@ export default function LandingPage() {
           Ingliz tili
         </h1>
         <div>
-          <Courses />
+          <Courses type={typeName} />
         </div>
       </div>
     </div>

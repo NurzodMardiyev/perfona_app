@@ -17,12 +17,11 @@ export const Perfona = {
     }
   },
 
-  coursesData: async (page, limet) => {
+  coursesData: async (page, limet, category) => {
     // english o'zgaradi && page bilan limet ham o'zgaradi
-    console.log(page);
     try {
       const { data } = await axios.get(
-        `${api}key=main_card&page=${page}&limit=${limet}&category=english`,
+        `${api}key=main_card&page=${page}&limit=${limet}&category=${category}`,
         {
           mode: "cors",
           headers: {
@@ -30,6 +29,19 @@ export const Perfona = {
           },
         }
       );
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  courseDetails: async (id) => {
+    try {
+      const { data } = await axios.get(`${api}key=about&course_id=${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       return data;
     } catch (error) {
       throw new Error(error.message);
