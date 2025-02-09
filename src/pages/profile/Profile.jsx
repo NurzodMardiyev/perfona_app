@@ -52,10 +52,10 @@ export default function Profile() {
           <h2 className="text-[16px] font-medium">Profil</h2>
           <div className="px-[10px] py-[20px] rounded-xl bg-[#ffffffd0] dark:bg-gray-700">
             <ul className="list-none">
-              <li className="">
+              <li className="w-full">
                 <Link
                   to=""
-                  className="flex items-center gap-2 mb-4 cursor-pointer "
+                  className="flex items-center gap-2 mb-4 cursor-pointer w-full "
                 >
                   <span className="block w-[30px]">
                     <ImGift className="text-[20px]" />
@@ -63,24 +63,24 @@ export default function Profile() {
                   <p className=" ">Doʻstingizni taklif qiling, sovgʻa oling</p>
                 </Link>
               </li>
-              <li className="">
-                <Link to="" className="flex items-center gap-2 mb-4 ">
+              <li className="w-full">
+                <Link to="" className="flex items-center gap-2 mb-4  w-full">
                   <span className="block w-[30px]">
                     <IoSettingsOutline className="text-[20px]" />
                   </span>
                   <p className=" ">Sozlamalar</p>
                 </Link>
               </li>
-              <li className="">
-                <Link to="" className="flex items-center gap-2 mb-4 ">
+              <li className="w-full">
+                <Link to="" className="flex items-center gap-2 mb-4  w-full">
                   <span className="block w-[30px]">
                     <IoStarHalfSharp className="text-[22px]" />
                   </span>
                   <p className=" ">Sizning fikringiz & rayting</p>
                 </Link>
               </li>
-              <li className="">
-                <Link to="" className="flex items-center gap-2  mb-4 ">
+              <li className="w-full">
+                <Link to="" className="flex items-center gap-2  mb-4  w-full">
                   <span className="block w-[30px]">
                     <MdOutlineChangeCircle className="text-[22px]" />
                   </span>
@@ -88,7 +88,7 @@ export default function Profile() {
                 </Link>
               </li>
               <li className="flex w-full">
-                <Link to="/cards  " className="flex items-center gap-2 ">
+                <Link to="/cards  " className="flex items-center gap-2  w-full">
                   <span className="block w-[30px]">
                     <FaRegCreditCard className="text-[22px]" />
                   </span>
