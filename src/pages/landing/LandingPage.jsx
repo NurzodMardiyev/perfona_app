@@ -77,7 +77,7 @@ export default function LandingPage() {
         </div>
       )} */}
 
-      <div className="container max-w-sm  mx-auto pt-[50px]   px-1">
+      <div className="container max-w-sm  mx-auto pt-[20px]   px-1">
         <div className="navbar flex justify-between items-center">
           <img src={logo} alt="Perfona" className="h-[41px] dark:hidden" />
           <img

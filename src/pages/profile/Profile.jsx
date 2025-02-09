@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   return (
     <div>
-      <div className="container max-w-sm mx-auto pt-[50px] dark:text-white">
+      <div className="container max-w-sm mx-auto pt-[20px] dark:text-white">
         {/* Header */}
         <div className="flex items-center justify-between">
           {/* <div></div> */}

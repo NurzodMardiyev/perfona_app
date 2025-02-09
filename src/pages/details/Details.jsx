@@ -32,7 +32,7 @@ export default function Details() {
   }, []);
   return (
     <div className="">
-      <div className="container max-w-sm mx-auto pt-[50px] dark:text-white ">
+      <div className="container max-w-sm mx-auto pt-[20px] dark:text-white ">
         <ToBack link={"/"} />
         <div className="">
           <Swiper

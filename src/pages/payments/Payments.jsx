@@ -16,7 +16,7 @@ export default function Payments() {
 
   return (
     <div>
-      <div className="container max-w-sm mx-auto pt-[50px]">
+      <div className="container max-w-sm mx-auto pt-[20px]">
         {/* Header section */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 dark:text-white">

@@ -4,7 +4,7 @@ import ToBack from "../../components/ToBack";
 export default function Cards() {
   return (
     <div>
-      <div className="container max-w-sm mx-auto pt-[50px] dark:text-white ">
+      <div className="container max-w-sm mx-auto pt-[20px] dark:text-white ">
         <ToBack link={"/profile"} />
         <div className="flex items-end justify-between py-[20px] px-[10px] rounded-xl text-white bg-gradient-to-tl from-[#003EFF] to-[#0094FF] ">
           <div>
