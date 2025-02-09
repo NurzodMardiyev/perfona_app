@@ -215,3 +215,15 @@ body {
   height: 100%;
   object-fit: cover;
 }
+.dark
+  :where(.css-dev-only-do-not-override-xex5fb).ant-form-item
+  .ant-form-item-label
+  > label,
+.dark
+  :where(.css-dev-only-do-not-override-xex5fb).ant-drawer
+  .ant-drawer-close {
+  color: white;
+}
+.cardInput::placeholder {
+  color: rgb(169, 169, 169);
+}

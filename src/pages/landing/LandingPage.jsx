@@ -20,6 +20,7 @@ export default function LandingPage() {
   const [anchorValue, setAnchorValue] = useState("");
   const [coursesType, setCoursesType] = useState([]);
   const [typeName, setTypeName] = useState("english");
+  const [typeNameOrg, setTypeNameOrg] = useState("Ingliz tili");
 
   // const location = useLocation();
 
@@ -28,7 +29,7 @@ export default function LandingPage() {
     onSuccess: (data) => {
       queryClient.invalidateQueries();
       setCoursesType(data);
-      // console.log(data);
+      console.log(data);
     },
     onError: () => {
       console.log("error mutation detailInfo");
@@ -185,8 +186,13 @@ export default function LandingPage() {
           {coursesType?.map((item) => (
             <li
               key={item.key}
-              className="px-[23px] py-[8px] rounded-full course_type active whitespace-nowrap cursor-pointer"
-              onClick={() => setTypeName(item.name)}
+              className={`px-[23px] py-[8px] rounded-full course_type dark:bg-gray-900 dark:text-white ${
+                typeName === item.key ? "active" : ""
+              }  whitespace-nowrap cursor-pointer`}
+              onClick={() => {
+                setTypeName(item.key);
+                setTypeNameOrg(item.name);
+              }}
             >
               {item.name}
             </li>
@@ -210,7 +216,7 @@ export default function LandingPage() {
       {/* Courses */}
       <div className="container max-w-sm  mx-auto mt-[20px] pb-[120px] px-1">
         <h1 className="text-[32px] font-medium italic dark:text-white">
-          Ingliz tili
+          {typeNameOrg}
         </h1>
         <div>
           <Courses type={typeName} />

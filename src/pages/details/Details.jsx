@@ -8,9 +8,10 @@ import "swiper/css/pagination";
 import "../../App.css";
 import { Bell } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Perfona } from "../../queries/queries";
+import ToBack from "../../components/ToBack";
 
 export default function Details() {
   const { id } = useParams();
@@ -32,6 +33,7 @@ export default function Details() {
   return (
     <div className="">
       <div className="container max-w-sm mx-auto pt-[50px] dark:text-white ">
+        <ToBack link={"/"} />
         <div className="">
           <Swiper
             pagination={{

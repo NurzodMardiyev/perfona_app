@@ -5,11 +5,12 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IoStarHalfSharp } from "react-icons/io5";
 import { MdOutlineChangeCircle } from "react-icons/md";
 import { FaRegCreditCard } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   return (
     <div>
-      <div className="container max-w-sm mx-auto pt-[50px]">
+      <div className="container max-w-sm mx-auto pt-[50px] dark:text-white">
         {/* Header */}
         <div className="flex items-center justify-between">
           {/* <div></div> */}
@@ -49,37 +50,50 @@ export default function Profile() {
         {/* Hepl */}
         <div className="mt-[14px]">
           <h2 className="text-[16px] font-medium">Profil</h2>
-          <div className="px-[10px] py-[20px] rounded-xl bg-[#ffffffd0]">
+          <div className="px-[10px] py-[20px] rounded-xl bg-[#ffffffd0] dark:bg-gray-700">
             <ul className="list-none">
-              <li className="flex items-center gap-2 mb-4">
-                <span className="block w-[30px]">
-                  <ImGift className="text-[20px]" />
-                </span>
-                <p className=" ">Doʻstingizni taklif qiling, sovgʻa oling</p>
+              <li className="">
+                <Link
+                  to=""
+                  className="flex items-center gap-2 mb-4 cursor-pointer "
+                >
+                  <span className="block w-[30px]">
+                    <ImGift className="text-[20px]" />
+                  </span>
+                  <p className=" ">Doʻstingizni taklif qiling, sovgʻa oling</p>
+                </Link>
               </li>
-              <li className="flex items-center gap-2 mb-4">
-                <span className="block w-[30px]">
-                  <IoSettingsOutline className="text-[20px]" />
-                </span>
-                <p className=" ">Sozlamalar</p>
+              <li className="">
+                <Link to="" className="flex items-center gap-2 mb-4 ">
+                  <span className="block w-[30px]">
+                    <IoSettingsOutline className="text-[20px]" />
+                  </span>
+                  <p className=" ">Sozlamalar</p>
+                </Link>
               </li>
-              <li className="flex items-center gap-2 mb-4">
-                <span className="block w-[30px]">
-                  <IoStarHalfSharp className="text-[22px]" />
-                </span>
-                <p className=" ">Sizning fikringiz & rayting</p>
+              <li className="">
+                <Link to="" className="flex items-center gap-2 mb-4 ">
+                  <span className="block w-[30px]">
+                    <IoStarHalfSharp className="text-[22px]" />
+                  </span>
+                  <p className=" ">Sizning fikringiz & rayting</p>
+                </Link>
               </li>
-              <li className="flex items-center gap-2  mb-4">
-                <span className="block w-[30px]">
-                  <MdOutlineChangeCircle className="text-[22px]" />
-                </span>
-                <p className=" ">Tilni oʻzgartirish</p>
+              <li className="">
+                <Link to="" className="flex items-center gap-2  mb-4 ">
+                  <span className="block w-[30px]">
+                    <MdOutlineChangeCircle className="text-[22px]" />
+                  </span>
+                  <p className=" ">Tilni oʻzgartirish</p>
+                </Link>
               </li>
-              <li className="flex items-center gap-2 ">
-                <span className="block w-[30px]">
-                  <FaRegCreditCard className="text-[22px]" />
-                </span>
-                <p className=" ">Kartalar</p>
+              <li className="flex w-full">
+                <Link to="/cards  " className="flex items-center gap-2 ">
+                  <span className="block w-[30px]">
+                    <FaRegCreditCard className="text-[22px]" />
+                  </span>
+                  <p className=" ">Kartalar</p>
+                </Link>
               </li>
             </ul>
           </div>

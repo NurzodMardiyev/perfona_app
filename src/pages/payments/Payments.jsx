@@ -1,7 +1,19 @@
-import { MdNotificationsActive } from "react-icons/md";
 import { LuMoveRight } from "react-icons/lu";
+import { RiAddLine } from "react-icons/ri";
+import { Drawer } from "antd";
+import { useState } from "react";
+import "../../App.css";
+import AddCard from "../../components/AddCard";
 
 export default function Payments() {
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
       <div className="container max-w-sm mx-auto pt-[50px]">
@@ -24,11 +36,22 @@ export default function Payments() {
           </div>
           <div>
             {/* natification */}
-            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-tl from-[#003EFF] to-[#0094FF] flex items-center justify-center">
-              <MdNotificationsActive className="text-[20px] text-white " />
+            <div
+              className="w-[50px] h-[50px] rounded-full bg-gradient-to-tl from-[#003EFF] to-[#0094FF] flex items-center justify-center cursor-pointer"
+              onClick={showDrawer}
+            >
+              <RiAddLine className="text-[28px] text-white font-bold " />
             </div>
           </div>
         </div>
+        <Drawer
+          className="w-[300px] dark:bg-gray-800 dark:text-white"
+          title="Karta qo'shish"
+          onClose={onClose}
+          open={open}
+        >
+          <AddCard />
+        </Drawer>
 
         {/* Card */}
         <div className="flex items-end justify-between py-[20px] px-[10px] rounded-xl text-white bg-gradient-to-tl from-[#003EFF] to-[#0094FF] mt-[20px]">

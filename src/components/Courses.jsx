@@ -43,8 +43,6 @@ export default function Courses({ type }) {
     }
   );
 
-  // console.log(courseData);
-
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -62,7 +60,6 @@ export default function Courses({ type }) {
 
   // Dastlabki ma'lumotlarni yuklash
   useEffect(() => {
-    console.log("Fetching initial data...");
     setIsFetching(false);
     coursesData.mutate(page); // Birinchi sahifani yuklash
   }, []);
@@ -78,15 +75,17 @@ export default function Courses({ type }) {
       console.log("Fetching page:", page);
       coursesData.mutate(page);
     }
-  }, [page, type]); // page o'zgarganda ishlaydi
+  }, [page]); // page o'zgarganda ishlaydi
 
-  if (courseData.isLoading) {
-    return (
-      <div className="w-full h-[100vh] flex items-center justify-center z-[999]">
-        <Spin />
-      </div>
-    );
-  }
+  console.log(category);
+
+  useEffect(() => {
+    setIsFetching(false);
+    setPage(1); // Sahifani 1 ga qaytarish
+    setHasMore(true); // Yangi kategoriya uchun hasMore ni true qilish
+    setCourseData({ data: [], category: "", page: 1 }); // Eski ma'lumotlarni tozalash
+    coursesData.mutate(1); // Birinchi sahifani yuklash
+  }, [category]); // category o'zgarganda ishlaydi
 
   return (
     <div>
@@ -132,6 +131,12 @@ export default function Courses({ type }) {
           </div>
         </div>
       ))}
+
+      {(coursesData.isLoading || isFetching) && (
+        <div className="w-full flex items-center justify-center mt-6">
+          <Spin />
+        </div>
+      )}
 
       {/* <div className="relative mb-4">
         <img
