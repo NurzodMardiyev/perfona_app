@@ -227,3 +227,8 @@ body {
 .cardInput::placeholder {
   color: rgb(169, 169, 169);
 }
+:where(.css-dev-only-do-not-override-xex5fb).ant-btn-variant-text:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
+  background: #9ca3af;
+}

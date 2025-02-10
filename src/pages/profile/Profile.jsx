@@ -6,8 +6,20 @@ import { IoStarHalfSharp } from "react-icons/io5";
 import { MdOutlineChangeCircle } from "react-icons/md";
 import { FaRegCreditCard } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { Drawer } from "antd";
+import { useState } from "react";
+import "../../App.css";
 
 export default function Profile() {
+  const [openN, setOpenN] = useState(false);
+
+  const showNotification = () => {
+    setOpenN(true);
+  };
+
+  const onCloseNotification = () => {
+    setOpenN(false);
+  };
   return (
     <div>
       <div className="container max-w-sm mx-auto pt-[20px] dark:text-white">
@@ -21,11 +33,21 @@ export default function Profile() {
           </div>
           <div>
             {/* natification */}
-            <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-tl from-[#003EFF] to-[#0094FF] flex items-center justify-center">
+            <button
+              className="w-[50px] h-[50px] rounded-full bg-gradient-to-tl from-[#003EFF] to-[#0094FF] flex items-center justify-center"
+              onClick={showNotification}
+            >
               <MdNotificationsActive className="text-[20px] text-white " />
-            </div>
+            </button>
           </div>
         </div>
+
+        {/* natifiactioon Drawer */}
+        <Drawer
+          title="Xabarlar"
+          onClose={onCloseNotification}
+          open={openN}
+        ></Drawer>
 
         {/* Account  */}
         <div>
@@ -64,7 +86,10 @@ export default function Profile() {
                 </Link>
               </li>
               <li className="w-full">
-                <Link to="" className="flex items-center gap-2 mb-4  w-full">
+                <Link
+                  to="/settings"
+                  className="flex items-center gap-2 mb-4  w-full"
+                >
                   <span className="block w-[30px]">
                     <IoSettingsOutline className="text-[20px]" />
                   </span>

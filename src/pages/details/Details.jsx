@@ -33,7 +33,7 @@ export default function Details() {
   return (
     <div className="">
       <div className="container max-w-sm mx-auto pt-[20px] dark:text-white ">
-        <ToBack link={"/"} />
+        <ToBack link={"/"} title={"Batafsil"} />
         <div className="">
           <Swiper
             pagination={{
