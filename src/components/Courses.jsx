@@ -3,7 +3,7 @@ import courseImg from "../images/course.png";
 import { Bell, ShoppingBasket } from "lucide-react";
 import { useMutation, useQueryClient } from "react-query";
 import { Perfona } from "../queries/queries";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiDetail } from "react-icons/bi";
 import { Spin } from "antd";
 
@@ -18,6 +18,7 @@ export default function Courses({ type }) {
   });
   const limit = 3;
   const category = type;
+  // console.log(courseData);
 
   const coursesData = useMutation(
     (page) => Perfona.coursesData(page, limit, category),
@@ -59,9 +60,14 @@ export default function Courses({ type }) {
     }
   };
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    setIsFetching(true);
-    coursesData.mutate(page); // Birinchi sahifani yuklash
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      // setIsFetching(true);
+      coursesData.mutate(page); // Faqat birinchi marta ishga tushadi
+    }
   }, []);
 
   useEffect(() => {
