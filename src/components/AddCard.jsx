@@ -50,7 +50,7 @@ export default function AddCard() {
             </Form.Item>
           </div>
           <p>{user?.first_name}</p>
-          {/* <p>{id}</p> */}
+          <p>name</p>
           <div>
             <button
               type="submit"
