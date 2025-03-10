@@ -2,9 +2,12 @@ import { MdLibraryAddCheck } from "react-icons/md";
 import { Form, Input } from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Perfona } from "../queries/queries.js";
+import { useContext } from "react";
+import { ContextPerfona } from "../context/contextApi.js";
 
 export default function AddCard() {
   const queryClient = useQueryClient();
+  const { user } = useContext(ContextPerfona);
 
   const addCard = useMutation(() => Perfona.addCard(), {
     onSuccess: (data) => {
@@ -46,6 +49,7 @@ export default function AddCard() {
               <Input className="rounded-md mt-[-10px] dark:bg-gray-800 dark:text-white cardInput" />
             </Form.Item>
           </div>
+          <p>{user}</p>
           <div>
             <button
               type="submit"
