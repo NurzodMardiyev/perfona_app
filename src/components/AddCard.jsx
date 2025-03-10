@@ -3,11 +3,11 @@ import { Form, Input } from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Perfona } from "../queries/queries.js";
 import { useContext } from "react";
-import { ContextPerfona } from "../context/contextApi.js";
+import { contextPerfona } from "../context/contextApi.jsx";
 
 export default function AddCard() {
   const queryClient = useQueryClient();
-  const { user } = useContext(ContextPerfona);
+  const { user } = useContext(contextPerfona);
 
   const addCard = useMutation(() => Perfona.addCard(), {
     onSuccess: (data) => {
@@ -49,7 +49,8 @@ export default function AddCard() {
               <Input className="rounded-md mt-[-10px] dark:bg-gray-800 dark:text-white cardInput" />
             </Form.Item>
           </div>
-          <p>{user}</p>
+          <p>{user?.first_name}</p>
+          {/* <p>{id}</p> */}
           <div>
             <button
               type="submit"
