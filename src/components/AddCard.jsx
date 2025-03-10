@@ -4,15 +4,18 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Perfona } from "../queries/queries.js";
 import { useContext } from "react";
 import { contextPerfona } from "../context/contextApi.jsx";
+import { useState } from "react";
 
 export default function AddCard() {
   const queryClient = useQueryClient();
   const { user } = useContext(contextPerfona);
+  const [responseData, setResponseData] = useState();
 
   const addCard = useMutation((fullData) => Perfona.addCard(fullData), {
     onSuccess: (data) => {
       queryClient.invalidateQueries();
       console.log(data);
+      setResponseData(data);
     },
   });
 
@@ -53,6 +56,8 @@ export default function AddCard() {
             </Form.Item>
           </div>
           <p>{user?.id}</p>
+          <p>{user?.first_name}</p>
+          <p>{responseData}</p>
           <p>name</p>
           <div>
             <button
