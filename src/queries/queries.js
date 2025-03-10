@@ -50,15 +50,16 @@ export const Perfona = {
 
   addCard: async (data) => {
     try {
-      const { data } = await axios.get(
+      const response = await axios.post(
         `https://api.perfona.uz/v1/payment/card/add.php`,
+        data,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      return data;
+      return response;
     } catch (error) {
       throw new Error(error.message);
     }

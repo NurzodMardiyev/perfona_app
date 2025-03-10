@@ -9,7 +9,7 @@ export default function AddCard() {
   const queryClient = useQueryClient();
   const { user } = useContext(contextPerfona);
 
-  const addCard = useMutation(() => Perfona.addCard(), {
+  const addCard = useMutation((fullData) => Perfona.addCard(fullData), {
     onSuccess: (data) => {
       queryClient.invalidateQueries();
       console.log(data);
@@ -17,7 +17,10 @@ export default function AddCard() {
   });
 
   const handleSendValues = (data) => {
-    console.log(data);
+    const fullData = { ...data, chatID: user?.id };
+    console.log(fullData);
+
+    addCard.mutate(fullData);
   };
 
   const cardNumberChange = (e) => {
@@ -30,7 +33,7 @@ export default function AddCard() {
     <div>
       <div>
         <Form onFinish={handleSendValues}>
-          <Form.Item name="cardNumber" label="Karta raqami">
+          <Form.Item name="card_number" label="Karta raqami">
             <Input
               className="rounded-md mt-[-10px] dark:bg-gray-800  dark:text-white cardInput"
               placeholder="**** **** **** ****"
@@ -39,7 +42,7 @@ export default function AddCard() {
             />
           </Form.Item>
           <div className="flex gap-5">
-            <Form.Item name="cardDate" label="Muddati">
+            <Form.Item name="expiry" label="Muddati">
               <Input
                 className="rounded-md mt-[-10px] dark:bg-gray-800 dark:text-white cardInput"
                 placeholder="**/**"
@@ -49,7 +52,7 @@ export default function AddCard() {
               <Input className="rounded-md mt-[-10px] dark:bg-gray-800 dark:text-white cardInput" />
             </Form.Item>
           </div>
-          <p>{user?.first_name}</p>
+          <p>{user?.id}</p>
           <p>name</p>
           <div>
             <button
