@@ -14,7 +14,7 @@ export default function Courses({ type }) {
   const [courseData, setCourseData] = useState({
     data: [],
     category: "",
-    page: 1,
+    page: 0,
   });
   const limit = 3;
   const category = type;
@@ -62,13 +62,13 @@ export default function Courses({ type }) {
 
   const isFirstRender = useRef(true);
 
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      // setIsFetching(true);
-      coursesData.mutate(page); // Faqat birinchi marta ishga tushadi
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isFirstRender.current) {
+  //     isFirstRender.current = false;
+  //     // setIsFetching(true);
+  //     coursesData.mutate(page); // Faqat birinchi marta ishga tushadi
+  //   }
+  // }, []);
 
   useEffect(() => {
     const debouncedHandleScroll = () => {
@@ -86,11 +86,16 @@ export default function Courses({ type }) {
   }, [page]);
 
   useEffect(() => {
-    setIsFetching(false);
-    setPage(1); // Sahifani 1 ga qaytarish
-    setHasMore(true); // Yangi kategoriya uchun hasMore ni true qilish
-    setCourseData({ data: [], category: "", page: 1 }); // Eski ma'lumotlarni tozalash
-    coursesData.mutate(1); // Birinchi sahifani yuklash
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      coursesData.mutate(1);
+    } else {
+      setIsFetching(false);
+      setPage(1);
+      setHasMore(true);
+      setCourseData({ data: [], category: "", page: 1 });
+      coursesData.mutate(1); // Yangi kategoriya uchun yuklash
+    }
   }, [category]);
 
   return (
