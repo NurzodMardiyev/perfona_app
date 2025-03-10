@@ -62,14 +62,6 @@ export default function Courses({ type }) {
 
   const isFirstRender = useRef(true);
 
-  // useEffect(() => {
-  //   if (isFirstRender.current) {
-  //     isFirstRender.current = false;
-  //     // setIsFetching(true);
-  //     coursesData.mutate(page); // Faqat birinchi marta ishga tushadi
-  //   }
-  // }, []);
-
   useEffect(() => {
     const debouncedHandleScroll = () => {
       setTimeout(handleScroll, 100); // 100ms kechikish
@@ -106,6 +98,7 @@ export default function Courses({ type }) {
             src={item?.img}
             alt={item?.name}
             className="rounded-xl w-full h-[217px] object-cover"
+            loading="lazy"
           />
           <div className="w-full absolute top-0 left-0 h-full bg-gradient-to-t from-[#1601ffbd] to-[#8d88d537] rounded-xl"></div>
           <div className="flex items-center justify-around px-6 absolute w-full bottom-4">

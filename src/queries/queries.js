@@ -47,4 +47,20 @@ export const Perfona = {
       throw new Error(error.message);
     }
   },
+
+  addCard: async (data) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.perfona.uz/v1/payment/card/add.php`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
 };

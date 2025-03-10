@@ -1,7 +1,18 @@
 import { MdLibraryAddCheck } from "react-icons/md";
 import { Form, Input } from "antd";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { Perfona } from "../queries/queries.js";
 
 export default function AddCard() {
+  const queryClient = useQueryClient();
+
+  const addCard = useMutation(() => Perfona.addCard(), {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries();
+      console.log(data);
+    },
+  });
+
   const handleSendValues = (data) => {
     console.log(data);
   };
@@ -31,7 +42,7 @@ export default function AddCard() {
                 placeholder="**/**"
               />
             </Form.Item>
-            <Form.Item name="cardName" label="Karta nomi">
+            <Form.Item label="Karta nomi">
               <Input className="rounded-md mt-[-10px] dark:bg-gray-800 dark:text-white cardInput" />
             </Form.Item>
           </div>
