@@ -1,10 +1,11 @@
 import { MdLibraryAddCheck } from "react-icons/md";
 import { Form, Input } from "antd";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { Perfona } from "../queries/queries.js";
 import { useContext } from "react";
 import { contextPerfona } from "../context/contextApi.jsx";
 import { useState } from "react";
+import InputMask from "react-input-mask";
 
 export default function AddCard() {
   const queryClient = useQueryClient();
@@ -20,29 +21,53 @@ export default function AddCard() {
   });
 
   const handleSendValues = (data) => {
-    const fullData = { ...data, chatID: user?.id };
+    const fullData = { ...data, chatID: "2052844797" };
     console.log(fullData);
 
     addCard.mutate(fullData);
   };
 
-  const cardNumberChange = (e) => {
-    console.log(e.target.value);
-    if (e.target.value.length % 4 === 0 && e.target.value.length !== 0) {
-      console.log("name");
+  const [cardNumber, setCardNumber] = useState("");
+
+  const handleInputChange = (e) => {
+    const value = e.target.value.replace(/\s/g, ""); // Probellarni olib tashlash
+    setCardNumber(value); // Toza raqamlar bilan state-ni yangilash
+    console.log("Karta raqami:", value); // Backendga yuborish uchun tayyor
+  };
+
+  const handleKeyDown = (e) => {
+    // Orqadan probelni o'chirishni to'g'ri boshqarish
+    if (e.key === "Backspace") {
+      setTimeout(() => {
+        e.target.selectionStart = e.target.selectionEnd = e.target.value.length;
+      }, 0);
     }
   };
+  console.log(cardNumber);
   return (
     <div>
       <div>
         <Form onFinish={handleSendValues}>
           <Form.Item name="card_number" label="Karta raqami">
-            <Input
-              className="rounded-md mt-[-10px] dark:bg-gray-800  dark:text-white cardInput"
-              placeholder="**** **** **** ****"
-              type="number"
-              onChange={(e) => cardNumberChange(e)}
-            />
+            <InputMask
+              mask="9999 9999 9999 9999" // Har 4 ta raqamdan keyin probel qo'yamiz
+              alwaysShowMask={false}
+              maskChar={null} // Bo'sh joylarda hech narsa ko'rinmasin
+              value={cardNumber} // Input qiymati statedan olinadi
+              onChange={handleInputChange} // Input o'zgarganda handleInputChange ishlaydi
+              placeholder="Enter card number"
+              onKeyDown={handleKeyDown}
+            >
+              {(inputProps) => (
+                <Input
+                  className="rounded-md mt-[-10px] dark:bg-gray-800 dark:text-white cardInput"
+                  {...inputProps}
+                  type="text"
+                  maxLength={19}
+                />
+              )}
+              {/* Input elementini yaratamiz */}
+            </InputMask>
           </Form.Item>
           <div className="flex gap-5">
             <Form.Item name="expiry" label="Muddati">
