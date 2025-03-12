@@ -24,6 +24,7 @@
     "react-input-mask": "^2.0.4",
     "react-query": "^3.39.3",
     "react-router-dom": "^7.1.4",
+    "react-text-mask": "^5.5.0",
     "swiper": "^11.2.2"
   },
   "devDependencies": {
