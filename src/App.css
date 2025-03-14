@@ -215,20 +215,21 @@ body {
   height: 100%;
   object-fit: cover;
 }
-.dark
-  :where(.css-dev-only-do-not-override-xex5fb).ant-form-item
-  .ant-form-item-label
-  > label,
-.dark
-  :where(.css-dev-only-do-not-override-xex5fb).ant-drawer
-  .ant-drawer-close {
+.dark .ant-form-item .ant-form-item-label > label,
+.dark .ant-drawer .ant-drawer-close {
   color: white;
 }
 .cardInput::placeholder {
   color: rgb(169, 169, 169);
 }
-:where(.css-dev-only-do-not-override-xex5fb).ant-btn-variant-text:not(
-    :disabled
-  ):not(.ant-btn-disabled):hover {
+.ant-btn-variant-text:not(:disabled):not(.ant-btn-disabled):hover {
   background: #9ca3af;
+}
+.ant-otp > input {
+  padding: 4px;
+  border-radius: 4px;
+}
+.ant-form-item .ant-form-item-control-input-conten {
+  display: flex;
+  gap: 10px;
 }

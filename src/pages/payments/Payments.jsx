@@ -1,18 +1,39 @@
 import { LuMoveRight } from "react-icons/lu";
 import { RiAddLine } from "react-icons/ri";
 import { Drawer } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../App.css";
 import AddCard from "../../components/AddCard";
+import { useMutation, useQueryClient } from "react-query";
+import { Perfona } from "../../queries/queries";
 
 export default function Payments() {
   const [open, setOpen] = useState(false);
+  const [cards, setCards] = useState([]);
+  const chatId = { chatID: "1234" };
+
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+
+  const queryClient = useQueryClient();
+  const cardsMutate = useMutation((chatID) => Perfona.userCards(chatID), {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("cards");
+      // console.log(data.cards);
+      setCards(data?.cards);
+    },
+    onError: () => {
+      console.log("Error Mutation");
+    },
+  });
+
+  useEffect(() => {
+    cardsMutate.mutate(chatId);
+  }, []);
 
   return (
     <div>
@@ -54,17 +75,32 @@ export default function Payments() {
         </Drawer>
 
         {/* Card */}
-        <div className="flex items-end justify-between py-[20px] px-[10px] rounded-xl text-white bg-gradient-to-tl from-[#003EFF] to-[#0094FF] mt-[20px]">
-          <div>
-            <span className="mb-5 inline-block">
-              <p className="text-[24px] font-semibold">9860 **** **** 5195</p>
-              <p>03/25</p>
-            </span>
-            <p className="text-[16px] italic">Nurzod Mardiyev</p>
-          </div>
-          <div>
-            <span className="text-[18px] font-medium">Humo</span>
-          </div>
+        <div className="flex overflow-x-scroll w-full space-x-4">
+          {cards?.map((item, index) => {
+            const expiryDate = item.expiry.slice(2);
+            const expiryYear = item.expiry.slice(0, 2);
+            return (
+              <div
+                key={index}
+                className={`${
+                  cards.length === 1 ? "w-full" : "w-80"
+                } flex flex-shrink-0 items-end justify-between py-[20px] px-[10px] rounded-xl text-white bg-gradient-to-tl from-[#003EFF] to-[#0094FF] mt-[20px]`}
+              >
+                <div>
+                  <span className="mb-5 inline-block">
+                    <h1 className="text-lg font-semibold">{item.pan}</h1>
+                    <p>
+                      {expiryDate}/{expiryYear}
+                    </p>
+                  </span>
+                  <p className="text-[16px] italic">Nurzod Mardiyev</p>
+                </div>
+                <div>
+                  <span className="text-[18px] font-medium">Humo</span>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* payment History */}

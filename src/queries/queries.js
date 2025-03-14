@@ -59,9 +59,41 @@ export const Perfona = {
           },
         }
       );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
 
-      console.log(response);
-      return response;
+  otpCode: async (data) => {
+    try {
+      const response = await axios.post(
+        `https://api.perfona.uz/v1/payment/card/otp.php`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  userCards: async (chatID) => {
+    try {
+      const response = await axios.post(
+        `https://api.perfona.uz/v1/payment/card/get.php`,
+        chatID,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
     } catch (error) {
       throw new Error(error.message);
     }
