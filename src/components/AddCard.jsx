@@ -148,20 +148,20 @@ export default function AddCard() {
             </Form.Item>
           </div>
           {contextHolder}
-          <div className="flex items-center smsInput">
+          <div className="flex flex-col items-center smsInput">
             <Form.Item
               label="Kodni kiriting"
               hasFeedback
               validateStatus="success"
-              className="flex items-center"
+              className="flex items-center "
             >
               <Input.OTP
-                className="min-h-[39px] p-0 inline-block"
+                className="min-h-[39px] w-full p-0 inline-block"
                 onChange={handleChangeSmsValue}
               />
               <button
                 type="button"
-                className="ms-3 text-blue-500"
+                className="ms-3  text-blue-500"
                 onClick={handleSendSmsCode}
               >
                 Yubor..
