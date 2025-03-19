@@ -105,16 +105,16 @@ export default function LandingPage() {
               placeholder="Izlash..."
               value={anchorValue}
               onChange={handleValueChange}
-              className="border-none outline-none px-[58px] py-[19px] w-full rounded-full custom-placeholder dark:bg-gray-900 dark:text-white"
+              className="border-none outline-none px-[58px] py-[14px] w-full rounded-full custom-placeholder dark:bg-gray-900 dark:text-white"
             />
-            <div className="icon_search absolute w-[28px] top-[14px] left-[15px]">
+            <div className="icon_search absolute w-[26px] top-[10px] left-[15px]">
               <img src={search_icon} alt="Search" className="w-full " />
             </div>
             {/* search menu */}
             <div className="absolute top-[5px] right-[5px] ">
               <Tooltip title="Search Menu">
                 <button
-                  className="w-[50px] h-[50px] rounded-full bg-gradient-to-tl from-[#003EFF] to-[#0094FF] flex justify-center items-center p-[15px]"
+                  className="w-[41px] h-[41px] rounded-full bg-gradient-to-tl from-[#003EFF] to-[#0094FF] flex justify-center items-center p-[11px]"
                   onClick={handleDropDown}
                   aria-controls={open ? "account-menu" : undefined}
                   aria-haspopup="true"
@@ -146,7 +146,7 @@ export default function LandingPage() {
                   paper: {
                     elevation: 0,
                     sx: {
-                      mt: 20,
+                      mt: 15,
                       overflow: "visible",
                       filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                       "&::before": {

@@ -71,10 +71,13 @@
 .dark .css-1pjiorc-MuiPaper-root-MuiPopover-paper-MuiMenu-paper::before,
 .dark .css-1toxriw-MuiList-root-MuiMenu-list,
 .dark .css-1pjiorc-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
-  background-color: #1f2937;
+  background-color: #1f2937 !important;
   color: white;
 }
 .css-1rju2q6-MuiButtonBase-root-MuiMenuItem-root {
   font-size: 14px !important;
   font-style: italic;
+}
+.dark .css-l51lm5-MuiPaper-root-MuiPopover-paper-MuiMenu-paper::before {
+  background-color: #1f2937 !important;
 }

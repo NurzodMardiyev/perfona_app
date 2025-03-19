@@ -75,7 +75,7 @@ export default function Payments() {
         </Drawer>
 
         {/* Card */}
-        <div className="flex overflow-x-scroll w-full space-x-4">
+        <div className="flex overflow-x-scroll w-full space-x-4 scrollbar-hide">
           {cards?.map((item, index) => {
             const expiryDate = item.expiry.slice(2);
             const expiryYear = item.expiry.slice(0, 2);
