@@ -233,3 +233,13 @@ body {
   display: flex;
   gap: 10px;
 }
+
+.ant-drawer-right > .ant-drawer-content-wrapper {
+  width: 100% !important;
+}
+.ant-otp {
+  width: 100% !important;
+}
+.ant-otp .ant-otp-input {
+  padding: 10px 4px;
+}

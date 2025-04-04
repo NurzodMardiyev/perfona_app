@@ -66,12 +66,12 @@ export default function Payments() {
           </div>
         </div>
         <Drawer
-          className="w-[300px] dark:bg-gray-800 dark:text-white"
+          className="w-full dark:bg-gray-800 dark:text-white"
           title="Karta qo'shish"
           onClose={onClose}
           open={open}
         >
-          <AddCard />
+          <AddCard setOpen={setOpen} />
         </Drawer>
 
         {/* Card */}
