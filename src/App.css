@@ -243,3 +243,6 @@ body {
 .ant-otp .ant-otp-input {
   padding: 10px 4px;
 }
+.succus_modal .ant-modal-footer {
+  margin-top: 0px;
+}

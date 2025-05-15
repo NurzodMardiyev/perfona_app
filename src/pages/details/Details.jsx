@@ -12,6 +12,7 @@ import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Perfona } from "../../queries/queries";
 import ToBack from "../../components/ToBack";
+import DOMPurify from "dompurify";
 
 export default function Details() {
   const { id } = useParams();
@@ -23,9 +24,11 @@ export default function Details() {
     onSuccess: (data) => {
       queryClient.invalidateQueries();
       console.log(data);
-      setDetailDatas(data);
+      setDetailDatas(data.data);
     },
   });
+
+  const cleanHTML = DOMPurify.sanitize(detailDatas?.description);
 
   useEffect(() => {
     detailData.mutate();
@@ -44,7 +47,7 @@ export default function Details() {
           >
             <SwiperSlide className="rounded-xl">
               <img
-                src={detailDatas?.img}
+                src={detailDatas?.photo}
                 alt=""
                 className="rounded-xl object-cover w-full h-full"
               />
@@ -55,13 +58,11 @@ export default function Details() {
         </div>
         {/* tags */}
         <ul className="flex gap-2 mt-3 italic">
-          {detailDatas?.tags.map((item, index) => (
-            <li key={index}>#{item.name}</li>
-          ))}
+          <li>Turi: {detailDatas?.type}</li>
         </ul>
         {/* name and video */}
         <div className="flex items-start justify-between mt-3">
-          <h2 className="text-[24px] font-medium leading-[30px] ">
+          <h2 className="text-[22px] font-medium leading-[30px] ">
             {detailDatas?.name}
           </h2>
           {/* <div>
@@ -78,7 +79,7 @@ export default function Details() {
           </div> */}
         </div>
         <div className="mt-3">
-          <p>{detailDatas?.description}</p>
+          <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
         </div>
         <div className=" inline-block float-right mt-3">
           {detailDatas?.type === "subscription" ? (

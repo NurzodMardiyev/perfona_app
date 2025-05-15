@@ -7,35 +7,30 @@ import { contextPerfona } from "../context/contextApi.jsx";
 import { useState } from "react";
 import MaskedInput from "react-text-mask";
 import { FaExclamation } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import "../App.css";
-import SuccessPage from "./Success.jsx";
 
 export default function AddCard({ setOpen }) {
   const queryClient = useQueryClient();
   const { user } = useContext(contextPerfona);
   const [responseData, setResponseData] = useState();
   const [cardNumber, setCardNumber] = useState("");
-  const [expiry, setExpiry] = useState("");
   const [api, contextHolder] = notification.useNotification();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [test, setTest] = useState(true);
-  const [successData, setSuccessData] = useState({
-    transaction_id: "5162",
-    chatID: "1234",
-    otp: "",
-  });
+  const [transaction_Id, setTransaction_Id] = useState();
 
   const addCard = useMutation((fullData) => Perfona.addCard(fullData), {
     onSuccess: (data) => {
       queryClient.invalidateQueries("addCard");
-      if (data?.error) {
+      console.log(data);
+      if (data?.data.error) {
         openNotificationWithIcon("error");
-      } else if (data?.success) {
+      } else if (data?.data.success) {
         openNotificationWithIcon("success");
-        setSuccessData((prevState) => ({
-          ...prevState,
-          transaction_id: data?.transaction_id,
-        }));
+        setTest(false);
+        setTransaction_Id(data?.data.transaction_id);
       }
       setResponseData(data);
     },
@@ -47,6 +42,7 @@ export default function AddCard({ setOpen }) {
   const otpCode = useMutation((fullData) => Perfona.otpCode(fullData), {
     onSuccess: (data) => {
       queryClient.invalidateQueries("otpCode");
+      showModal();
       console.log(data);
     },
     onError: () => {
@@ -54,28 +50,18 @@ export default function AddCard({ setOpen }) {
     },
   });
 
-  console.log(successData);
-
   const handleSendValues = async (data) => {
     const card_number = cardNumber;
 
-    const fullData = { ...data, chatID: "1234", card_number, expiry };
-
-    setTest(false);
-    // addCard.mutate(fullData);
+    const fullData = { ...data, telegram_chat_id: "2052844797", card_number };
+    console.log(fullData);
+    setTest(true);
+    addCard.mutate(fullData);
   };
 
   const handleInputChangeCardNumber = (e) => {
     const value = e.target.value.replace(/\s/g, ""); // Probellarni olib tashlash
     setCardNumber(value);
-  };
-
-  const handleInputChangeExpiry = (e) => {
-    const inputValue = e.target.value.replace("/", "");
-
-    let value = inputValue.slice(2) + inputValue.slice(0, 2);
-
-    setExpiry(value);
   };
 
   const openNotificationWithIcon = (type) => {
@@ -96,19 +82,20 @@ export default function AddCard({ setOpen }) {
   };
 
   const handleSendSmsCode = (value) => {
-    showModal();
     console.log(value);
-    // otpCode.mutate(successData);
+    const otpValues = {
+      ...value,
+      transaction_id: transaction_Id,
+      telegram_chat_id: "2052844797",
+    };
+    otpCode.mutate(otpValues);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
+
+  const handleOK = () => {
     setIsModalOpen(false);
   };
 
@@ -125,7 +112,7 @@ export default function AddCard({ setOpen }) {
                 <p className="flex">
                   Karta raqam qoʻshish orqali siz toʻlovlarni amalga oshira
                   olasiz. Keyingi toʻlovlarni toʻlashingizda sizga habar
-                  beramiz!{" "}
+                  beramiz, kutilmagan holat boʻlmaydi!{" "}
                 </p>
               </div>
             </div>
@@ -167,7 +154,15 @@ export default function AddCard({ setOpen }) {
                   placeholder="12/34"
                   className=" mt-[-10px] dark:bg-gray-800 dark:text-white cardInput px-2 py-2 w-full border-x-none border-t-none border-b border-[#c6c6c6] focus:border-x-none focus:border-b focus:border-t-none focus:outline-none"
                   guide={false}
-                  onChange={handleInputChangeExpiry}
+                  // onChange={handleInputChangeExpiry}
+                />
+              </Form.Item>
+            </div>
+            <div className="">
+              <Form.Item name="card_holder" label="Nomi">
+                <input
+                  placeholder=""
+                  className=" mt-[-10px] dark:bg-gray-800 dark:text-white cardInput px-2 py-2 w-full border-x-none border-t-none border-b border-[#c6c6c6] focus:border-x-none focus:border-b focus:border-t-none focus:outline-none"
                 />
               </Form.Item>
             </div>
@@ -177,7 +172,7 @@ export default function AddCard({ setOpen }) {
             <div>
               <button
                 type="submit"
-                className="px-6 py-2.5 w-full flex justify-center rounded-md text-white bg-gradient-to-tl from-[#003EFF] to-[#0094FF] float-end flex items-center gap-1"
+                className="px-6 py-2.5 w-full justify-center rounded-md text-white bg-gradient-to-tl from-[#003EFF] to-[#0094FF] float-end flex items-center gap-1"
               >
                 <MdLibraryAddCheck className="text-[24px] mt-[-1px]" />
                 <span className="leading-[20px]">Kiritish</span>
@@ -203,7 +198,7 @@ export default function AddCard({ setOpen }) {
                 hasFeedback
                 validateStatus="success"
                 className="flex items-center w-full "
-                name="opt"
+                name="otp"
               >
                 <Input.OTP
                   className="min-h-[39px] w-full p-0 inline-block"
@@ -223,16 +218,32 @@ export default function AddCard({ setOpen }) {
             </div>
           </Form>
         )}
+
+        <Modal
+          className="succus_modal"
+          closable={false}
+          open={isModalOpen}
+          width="300px"
+          footer={false}
+        >
+          <div className="flex flex-col justify-center items-center h-full m-0 gap-3">
+            <div className="anime_circle w-[50px] h-[50px] border rounded-full flex justify-center items-center border-green-500 text-green-500">
+              <FaCheck />
+            </div>
+            <div>
+              <p>Muvaffaqiyatli?</p>
+            </div>
+            <div>
+              <button
+                className=" bg-gradient-to-tl from-[#003EFF] to-[#0094FF] px-[20px] py-[5px] rounded-[6px] text-white"
+                onClick={handleOK}
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </Modal>
       </div>
-      <Modal
-        title="Basic Modal"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        maskClosable={false}
-      >
-        <SuccessPage setOpen={setOpen} setIsModalOpen={setIsModalOpen} />
-      </Modal>
     </div>
   );
 }

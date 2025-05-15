@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const api = "https://api.perfona.uz/v1/webapp/index.php?";
+const api = "https://api.perfona.uz/api/";
 export const Perfona = {
   coursesCategory: async () => {
     try {
-      const { data } = await axios.get(`${api}key=category`, {
+      const { data } = await axios.get(`${api}contents/categories/`, {
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const Perfona = {
     // english o'zgaradi && page bilan limet ham o'zgaradi
     try {
       const { data } = await axios.get(
-        `${api}key=main_card&page=${page}&limit=${limet}&category=${category}`,
+        `${api}contents/?page=${page}&page_size=${limet}&category=${category}`,
         {
           mode: "cors",
           headers: {
@@ -37,7 +37,7 @@ export const Perfona = {
 
   courseDetails: async (id) => {
     try {
-      const { data } = await axios.get(`${api}key=about&course_id=${id}`, {
+      const { data } = await axios.get(`${api}contents/${id}/`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -50,15 +50,11 @@ export const Perfona = {
 
   addCard: async (data) => {
     try {
-      const response = await axios.post(
-        `https://api.perfona.uz/v1/payment/card/add.php`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${api}payments/cards/bind/`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       return response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -67,15 +63,11 @@ export const Perfona = {
 
   otpCode: async (data) => {
     try {
-      const response = await axios.post(
-        `https://api.perfona.uz/v1/payment/card/otp.php`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${api}payments/cards/verify/`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       return response.data;
     } catch (error) {
       throw new Error(error.message);
