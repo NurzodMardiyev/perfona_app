@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: "/", // asosiy joylash uchun
   server: {
-    port: 5173, // standart Vite porti yoki o'zingiz xohlagan port
+    port: 5174, // standart Vite porti yoki o'zingiz xohlagan port
     strictPort: true,
   },
   build: {

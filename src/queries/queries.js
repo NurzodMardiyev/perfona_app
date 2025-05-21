@@ -76,9 +76,8 @@ export const Perfona = {
 
   userCards: async (chatID) => {
     try {
-      const response = await axios.post(
-        `https://api.perfona.uz/v1/payment/card/get.php`,
-        chatID,
+      const response = await axios.get(
+        `${api}payments/cards/my/?chat_id=${chatID}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -53,7 +53,7 @@ export default function AddCard({ setOpen }) {
   const handleSendValues = async (data) => {
     const card_number = cardNumber;
 
-    const fullData = { ...data, telegram_chat_id: "2052844797", card_number };
+    const fullData = { ...data, telegram_chat_id: user?.id, card_number };
     console.log(fullData);
     setTest(true);
     addCard.mutate(fullData);
@@ -86,7 +86,7 @@ export default function AddCard({ setOpen }) {
     const otpValues = {
       ...value,
       transaction_id: transaction_Id,
-      telegram_chat_id: "2052844797",
+      telegram_chat_id: user?.id,
     };
     otpCode.mutate(otpValues);
   };

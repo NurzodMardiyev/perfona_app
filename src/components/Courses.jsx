@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "react-query";
 import { Perfona } from "../queries/queries";
 import { useContext, useEffect, useRef, useState } from "react";
 import { BiDetail } from "react-icons/bi";
-import { Spin } from "antd";
+import { Popover, Spin } from "antd";
 import { contextPerfona } from "../context/contextApi";
 
 export default function Courses() {
@@ -73,6 +73,16 @@ export default function Courses() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasNextPage, isFetchingNextPage, hasMore]);
 
+  const subscribeChannel = (id) => {
+    console.log(id);
+  };
+
+  console.log(contentData?.pages);
+
+  const handleSubscription = (tariff_Id) => {
+    console.log(tariff_Id);
+  };
+
   if (isLoading)
     return <Spin className="w-full flex items-center justify-center mt-6" />;
   if (error && !contentData?.pages?.length) return <p>Error loading courses</p>;
@@ -91,15 +101,34 @@ export default function Courses() {
             <div className="w-full absolute top-0 left-0 h-full bg-gradient-to-t from-[#1601ff9c] to-[#8d88d500] rounded-xl"></div>
             <div className="flex items-center justify-around px-6 absolute w-full bottom-4">
               {item?.type === "channel" ? (
-                <Link
-                  to="/subscribe"
-                  className="py-[8px] px-[8px]  rounded-md bg-[#F4F6F8] text-[#1601ff] w-[140px] flex items-center gap-1  justify-center shadow-xl font- "
+                <Popover
+                  content={
+                    <div>
+                      {item.tariffs.map((tariff) => (
+                        <button
+                          className="w-full py-1 border mb-1"
+                          key={tariff.id}
+                          onClick={() => handleSubscription(tariff.id, item.id)}
+                        >
+                          {tariff.name}
+                        </button>
+                      ))}
+                    </div>
+                  }
+                  title="Tariflar"
+                  trigger="click"
                 >
-                  <Bell size={18} />
-                  <p className="whitespace-nowrap leading-[15px] mt-0.5">
-                    Obuna boʻling
-                  </p>
-                </Link>
+                  <button
+                    onClick={() => subscribeChannel(item.id)}
+                    className="py-[8px] px-[8px]  rounded-md bg-[#F4F6F8] text-[#1601ff] w-[140px] flex items-center gap-1  justify-center shadow-xl font- "
+                  >
+                    {" "}
+                    <Bell size={18} />
+                    <p className="whitespace-nowrap leading-[15px] mt-0.5">
+                      Obuna boʻling
+                    </p>
+                  </button>
+                </Popover>
               ) : (
                 <Link
                   to="/purchase"
